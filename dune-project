@@ -1,6 +1,6 @@
 (lang dune 2.0)
 (name visitors)
-(version unreleased)
+(version 20200210)
 (package
   (name visitors)
 )
