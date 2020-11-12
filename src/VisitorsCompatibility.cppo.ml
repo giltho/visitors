@@ -1,13 +1,18 @@
 let mknoloc = Location.mknoloc
+open Ppxlib
 open Asttypes
 open Parsetree
 open Ast_helper
 
 (* OCaml's abstract syntax tree evolves with time. We depend on this tree
    because we analyze it (that is, we analyze type definitions) and because we
-   construct it (that is, we generate code). This module gathers the ugly bits
-   whose definition varies depending on the version of OCaml that we are
-   working with. *)
+   construct it (that is, we generate code). This module was initially created
+   to gather the ugly bits whose definition varies depending on the version of
+   OCaml that we are working with. That said, since we have switched to using
+   [ppxlib], my understanding is that we always work with the latest version
+   of the AST. More precisely, the version of the AST that we get no longer
+   depends on which OCaml compiler we are using; it depends on which version
+   of [ppxlib] we are using. *)
 
 (* Constructing an arrow type. *)
 
@@ -91,36 +96,19 @@ let quantifiers qs : string list =
                 [object_field                          list] in OCaml 4.06. *)
 
 let object_field_to_core_type (field : object_field) : core_type =
-  #if OCAML_VERSION < (4, 08, 0)
-    match field with
-    | Otag (_, _, ty) -> ty
-    | Oinherit ty     -> ty
+  match field.pof_desc with
+  | Otag (_, ty)  -> ty
+  | Oinherit ty   -> ty
     (* this may seem nonsensical, but (so far) is used only in the
        function [occurs_type], where we do not care what the types
        mean *)
-  #else
-    match field.pof_desc with
-    | Otag (_, ty)  -> ty
-    | Oinherit ty   -> ty
-    (* this may seem nonsensical, but (so far) is used only in the
-       function [occurs_type], where we do not care what the types
-       mean *)
-  #endif
 
 let row_field_to_core_types (field : row_field) : core_type list =
-  #if OCAML_VERSION < (4, 08, 0)
-  match field with
-  | Rtag (_, _, _, tys) ->
-      tys
-  | Rinherit ty ->
-      [ ty ]
-  #else
   match field.prf_desc with
   | Rtag (_, _, tys) ->
       tys
   | Rinherit ty ->
       [ ty ]
-  #endif
 
 (* -------------------------------------------------------------------------- *)
 
@@ -134,8 +122,4 @@ let row_field_to_core_types (field : row_field) : core_type list =
 let floating (s : string) (items : structure) : structure_item =
   let name = mknoloc s
   and payload = PStr items in
-  #if OCAML_VERSION < (4, 08, 0)
-  Str.attribute (name, payload)
-  #else
   Str.attribute (Attr.mk name payload)
-  #endif
