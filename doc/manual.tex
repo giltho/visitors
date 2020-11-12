@@ -1227,8 +1227,9 @@ This is not accepted by OCaml, though;%
 we work around this limitation by making \oc|expr| an algebraic data type
 whose single data constructor is named~\oc|E|.%
 %
-\footnote{We mark this algebraic data type \oc|[@@unboxed]|, which (as of
-  OCaml 4.04) guarantees that there is no runtime cost associated with the
+\footnote{We mark this algebraic data type \oc|[@@unboxed]|, which
+  % as of OCaml 4.04
+  guarantees that there is no runtime cost associated with the
   data constructor~\oc|E|. Although \oc|expr| and \oc|expr oexpr| are
   considered distinct types by the OCaml typechecker, they have the same
   runtime representation.}
