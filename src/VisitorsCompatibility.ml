@@ -9,10 +9,12 @@ open Ast_helper
    construct it (that is, we generate code). This module was initially created
    to gather the ugly bits whose definition varies depending on the version of
    OCaml that we are working with. That said, since we have switched to using
-   [ppxlib], my understanding is that we always work with the latest version
-   of the AST. More precisely, the version of the AST that we get no longer
+   ppxlib, my understanding is that we always work with the latest version of
+   the AST. More precisely, the version of the AST that we get no longer
    depends on which OCaml compiler we are using; it depends on which version
-   of [ppxlib] we are using. *)
+   of ppxlib we are using. At the time of writing, we depend on ppxlib 0.9.0
+   or newer, which implies that we get an AST for OCaml 4.08 or newer. See
+   https://github.com/ocaml-ppx/ppxlib/blob/master/CHANGES.md *)
 
 (* Constructing an arrow type. *)
 
