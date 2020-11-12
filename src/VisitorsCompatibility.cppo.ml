@@ -9,10 +9,6 @@ open Ast_helper
    whose definition varies depending on the version of OCaml that we are
    working with. *)
 
-#if OCAML_VERSION < (4, 03, 0)
-#define Nolabel ""
-#endif
-
 (* Constructing an arrow type. *)
 
 let ty_arrow (a : core_type) (b : core_type) : core_type =
@@ -26,11 +22,7 @@ let plambda (p : pattern) (e : expression) : expression =
 (* Constructing a string literal. *)
 
 let const_string (w : string) =
-#if OCAML_VERSION < (4, 03, 0)
-  Const_string (w, None)
-#else
   Const.string w
-#endif
 
 (* [ld_label] and [ld_ty] extract a label and type out of an OCaml record label
    declaration. *)
@@ -58,17 +50,13 @@ type data_constructor_variety =
   | DataInlineRecord of label list * core_type list
 
 let data_constructor_variety (cd : constructor_declaration) =
-  #if OCAML_VERSION < (4, 03, 0)
-    DataTraditional cd.pcd_args
-  #else
-    match cd.pcd_args with
-    (* A traditional data constructor. *)
-    | Pcstr_tuple tys ->
-        DataTraditional tys
-    (* An ``inline record'' data constructor. *)
-    | Pcstr_record lds ->
-        DataInlineRecord (ld_labels lds, ld_tys lds)
-  #endif
+  match cd.pcd_args with
+  (* A traditional data constructor. *)
+  | Pcstr_tuple tys ->
+      DataTraditional tys
+  (* An ``inline record'' data constructor. *)
+  | Pcstr_record lds ->
+      DataInlineRecord (ld_labels lds, ld_tys lds)
 
 (* Between OCaml 4.04 and OCaml 4.05, the types of several functions in [Ast_helper]
    have changed. They used to take arguments of type [string], and now take arguments
@@ -76,25 +64,13 @@ let data_constructor_variety (cd : constructor_declaration) =
    [Typ.poly], [Exp.send], [Exp.newtype], [Ctf.val_], [Ctf.method_], [Cf.inherit_].  *)
 
 type str =
-  #if OCAML_VERSION < (4, 05, 0)
-    string
-  #else
-    string Location.loc
-  #endif
+  string Location.loc
 
 let string2str (s : string) : str =
-  #if OCAML_VERSION < (4, 05, 0)
-    s
-  #else
-    mknoloc s
-  #endif
+  mknoloc s
 
 let str2string (s : str) : string =
-  #if OCAML_VERSION < (4, 05, 0)
-    s
-  #else
-    s.txt
-  #endif
+  s.txt
 
 let typ_poly (tyvars : string list) (cty : core_type) : core_type =
   Typ.poly (List.map string2str tyvars) cty
@@ -114,17 +90,8 @@ let quantifiers qs : string list =
    changed from [(string loc * attributes * core_type) list] in OCaml 4.05 to
                 [object_field                          list] in OCaml 4.06. *)
 
-
-#if OCAML_VERSION < (4, 06, 0)
-type object_field =
-  str * attributes * core_type
-#endif
-
 let object_field_to_core_type (field : object_field) : core_type =
-  #if OCAML_VERSION < (4, 06, 0)
-    match field with
-    | (_, _, ty)      -> ty
-  #elif OCAML_VERSION < (4, 08, 0)
+  #if OCAML_VERSION < (4, 08, 0)
     match field with
     | Otag (_, _, ty) -> ty
     | Oinherit ty     -> ty
@@ -135,6 +102,9 @@ let object_field_to_core_type (field : object_field) : core_type =
     match field.pof_desc with
     | Otag (_, ty)  -> ty
     | Oinherit ty   -> ty
+    (* this may seem nonsensical, but (so far) is used only in the
+       function [occurs_type], where we do not care what the types
+       mean *)
   #endif
 
 let row_field_to_core_types (field : row_field) : core_type list =

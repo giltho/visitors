@@ -49,11 +49,6 @@ bench: test
 # ppx_deriving result hashcons ocp-indent ppx_import
 
 VERSIONS := \
-  4.02.3 \
-  4.03.0 \
-  4.04.2 \
-  4.05.0 \
-  4.06.1 \
   4.07.1 \
   4.08.1 \
   4.09.1 \
