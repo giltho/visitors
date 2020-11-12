@@ -351,7 +351,7 @@ let include_ (e : module_expr) : structure_item =
 
 let with_warnings (w : string) (items : structure_item list) : structure_item =
   include_ (Mod.structure (
-     floating "ocaml.warning" [ Str.eval (Exp.constant (const_string w)) ]
+     floating "ocaml.warning" [ Str.eval (Exp.constant (Const.string w)) ]
   :: items
   ))
 

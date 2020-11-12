@@ -24,11 +24,6 @@ let ty_arrow (a : core_type) (b : core_type) : core_type =
 let plambda (p : pattern) (e : expression) : expression =
   Exp.fun_ Nolabel None p e
 
-(* Constructing a string literal. *)
-
-let const_string (w : string) =
-  Const.string w
-
 (* [ld_label] and [ld_ty] extract a label and type out of an OCaml record label
    declaration. *)
 
