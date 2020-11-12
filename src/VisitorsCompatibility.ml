@@ -39,25 +39,6 @@ let ld_ty (ld : label_declaration) : core_type =
 let ld_tys =
   List.map ld_ty
 
-(* Analyzing the definition of a data constructor. *)
-
-(* A data constructor is either a traditional data constructor, whose
-   components are anonymous, or a data constructor whose components
-   form an ``inline record''. This is a new feature of OCaml 4.03. *)
-
-type data_constructor_variety =
-  | DataTraditional of core_type list
-  | DataInlineRecord of label list * core_type list
-
-let data_constructor_variety (cd : constructor_declaration) =
-  match cd.pcd_args with
-  (* A traditional data constructor. *)
-  | Pcstr_tuple tys ->
-      DataTraditional tys
-  (* An ``inline record'' data constructor. *)
-  | Pcstr_record lds ->
-      DataInlineRecord (ld_labels lds, ld_tys lds)
-
 (* Between OCaml 4.04 and OCaml 4.05, the types of several functions in [Ast_helper]
    have changed. They used to take arguments of type [string], and now take arguments
    of type [str], thus requiring a conversion. These functions include [Typ.object_],

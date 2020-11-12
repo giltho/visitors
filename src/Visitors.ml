@@ -1068,14 +1068,15 @@ let constructor_declaration decl (cd : constructor_declaration) : case =
   *)
 
   let xss, tys, pss, (builder : builder) =
-  match data_constructor_variety cd with
+  match cd.pcd_args with
     (* A traditional data constructor. *)
-    | DataTraditional tys ->
+    | Pcstr_tuple tys ->
         let xss = componentss tys in
         let pss = transpose arity (pvarss xss) in
         xss, tys, pss, fun rs -> constr datacon (evars rs)
     (* An ``inline record'' data constructor. *)
-    | DataInlineRecord (labels, tys) ->
+    | Pcstr_record lds ->
+        let labels, tys = ld_labels lds, ld_tys lds in
         let xss = fieldss labels in
         let pss = transpose arity (pvarss xss) in
         xss, tys,
