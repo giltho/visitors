@@ -1,5 +1,12 @@
 # Changes
 
+## 2020/11/12
+
+* Switch to version 5.0 of `ppx_deriving`. (This requires OCaml 4.07.)
+  Depend on `ppxlib` instead of `ppx_tools`.
+  Remove the dependency on `cppo`.
+  (Contributed by Kate Deplaix.)
+
 ## 2020/02/07
 
 * Avoid references to `Pervasives` in the generated code.
