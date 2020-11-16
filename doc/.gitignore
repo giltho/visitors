@@ -24,3 +24,4 @@ _whizzy*
 # latexmk
 *.fdb_latexmk
 *.fls
+*.synctex.gz

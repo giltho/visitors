@@ -2,24 +2,21 @@ export VISITORS_BUILDING_DOCUMENTATION=true
 
 include ../Makefile.preprocess
 
-export TEXINPUTS=.:../test:
+export TEXINPUTS=.:../test:../test/ppx_import:
 
-.PHONY: all loop clean
+SOURCEDIRS := ../test,../test/ppx_import
+ML         := $(shell ls {$(SOURCEDIRS)}/*.ml | grep -v cppo | grep -v processed)
+PROCESSED  := $(patsubst %.ml,%.processed.ml,$(ML))
 
-all: manual.pdf
+.PHONY: all loop clean sources
 
-SOURCES   := $(wildcard *.tex) $(wildcard *.bib) $(wildcard *.sty)
-ML        := $(shell ls ../test/*.ml | grep -v cppo | grep -v processed)
-PROCESSED := $(patsubst %.ml,%.processed.ml,$(ML))
+all: sources
+	latexmk -g -pdf manual
 
-%.pdf: %.tex $(SOURCES) $(ML) $(PROCESSED)
-	pdflatex $*
-	bibtex $*
-	pdflatex $*
-	pdflatex $*
-
-loop: $(SOURCES) $(ML) $(PROCESSED)
+loop: sources
 	latexmk -pdf -pvc manual
 
 clean:
 	rm -f *.log *.aux *.bbl *.blg *.out *.toc *~ manual.pdf
+
+sources: $(wildcard *.tex) $(wildcard *.bib) $(wildcard *.sty) $(ML) $(PROCESSED)
