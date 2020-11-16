@@ -42,4 +42,5 @@ BEAUTIFY     := \
 INDENT       := ocp-indent --config=JaneStreet,match_clause=4
 
 %.processed.ml: %.ml
-	$(REWRITE) $< | $(EXTRACT) $(BEAUTIFY) | $(INDENT) > $@
+	@ echo Preprocessing $<...
+	@ $(REWRITE) $< | $(EXTRACT) $(BEAUTIFY) | $(INDENT) > $@
