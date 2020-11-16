@@ -277,6 +277,7 @@ can use a command of the following form:
 \begin{quote}
 \verb|ocamlbuild -use-ocamlfind <other-flags> %.inferred.mli|
 \end{quote}
+% TEMPORARY explain how to it using Dune
 
 \fref{fig:inferred} shows the type that is inferred via such a command for the
 \iter visitor of \fref{fig:expr00}. This type is rather verbose, for two
@@ -1147,9 +1148,16 @@ as follows:
 
 \orig{expr_import}
 
-This expands to the code shown previously. (To use this syntax extension,
-assuming you are using \ocamlbuild and \ocamlfind, just add the line
-\texttt{true: package(ppx\_import)} to your \texttt{\_tags} file.) As icing on
+This expands to the code shown previously.
+(To use \ppximport and \visitors simultaneously,
+if you are using \dune,
+include
+\verb+(preprocess (staged_pps ppx_import visitors.ppx))+
+in your \texttt{dune} file.)
+% assuming you are using \ocamlbuild and \ocamlfind, just add the line
+% \texttt{true: package(ppx\_import)} to your \texttt{\_tags} file.)
+%
+As icing on
 the cake, \ppximport allows decorating the type definition, on the fly, with
 new attributes. In the following examples, we replace all occurrences of
 \oc|int| with \oc|int[@opaque]| (\sref{sec:opaque}), so as to ensure that the
