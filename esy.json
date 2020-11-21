@@ -1,0 +1,27 @@
+{
+  "name": "visitors",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Fork of Visitors, packaged for esy.",
+  "author": {
+    "name": "François Pottier",
+    "url": "https://gitlab.inria.fr/fpottier"
+  },
+  "homepage": "https://gitlab.inria.fr/fpottier/visitors",
+  "license": "BSD-3-Clause",
+  "esy": {
+    "build": "dune build -p visitors",
+    "buildsInSource": "_build"
+  },
+  "dependencies": {
+    "@opam/ppxlib": "^0.18.0",
+    "@opam/ppx_deriving": "ocaml-ppx/ppx_deriving:ppx_deriving.opam#acb4869",
+    "@opam/dune": "^2.0",
+    "ocaml": "^4.07.0"
+  },
+  "devDependencies": {
+    "ocaml": "4.11.1000",
+    "@opam/ocaml-lsp-server": "*",
+    "@opam/ocamlformat": "^0.15.1"
+  }
+}
