@@ -165,7 +165,7 @@ release:
 	@ git rm -rf --quiet releases
 # Remove files that need not (or must not) be distributed.
 	@ git rm --quiet \
-	    Makefile dune-workspace.versions \
+	    Makefile \
 	    TODO* NOTES
 # Uninstall.
 	@ echo "Now unpinning the package..."
