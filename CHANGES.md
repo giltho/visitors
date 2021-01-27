@@ -1,8 +1,10 @@
 # Changes
 
-## 2020/11/12
+## 2021/01/27
 
-* Switch to version 5.0 of `ppx_deriving`. (This requires OCaml 4.07.)
+* Switch to version 5.0 of `ppx_deriving`.
+  (At present, this implies requiring OCaml 4.07, but this may be relaxed
+  to OCaml 4.05 in the future, I am told.)
   Depend on `ppxlib` instead of `ppx_tools`.
   Remove the dependency on `cppo`.
   (Contributed by Kate Deplaix.)
