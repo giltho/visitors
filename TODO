@@ -2,6 +2,10 @@
 
 TODO (REALLY)
 
+Once ppx_deriving works with OCaml 4.05,
+relax our requirement to OCaml 4.05,
+and test with 4.05 and 4.06.
+
 Better clean up & share code at the three call sites of [bulk].
 
 ------------------------------------------------------------------------------
