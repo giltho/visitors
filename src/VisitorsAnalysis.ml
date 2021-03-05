@@ -191,7 +191,7 @@ let fix =
    [ptype_params] of a type definition, and returns the underlying type
    variable. *)
 
-let type_param_to_tyvar ((ty, _) : core_type * variance) : tyvar =
+let type_param_to_tyvar ((ty, _) : core_type * (variance * injectivity)) : tyvar =
   match ty.ptyp_desc with
   | Ptyp_var tv ->
       tv
