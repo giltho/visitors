@@ -2,6 +2,12 @@
 
 ## 2021/01/27
 
+* Switch to version 0.22.0 of `ppxlib`, which internally uses the abstract
+  syntax tree of OCaml 4.12.
+  (Contributed by Sonja Heinze.)
+
+## 2021/01/27
+
 * Switch to version 5.0 of `ppx_deriving`.
   (At present, this implies requiring OCaml 4.07, but this may be relaxed
   to OCaml 4.05 in the future, I am told.)
