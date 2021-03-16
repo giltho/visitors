@@ -49,11 +49,14 @@ bench: test
 # ppx_deriving result hashcons ocp-indent ppx_import
 
 VERSIONS := \
+  4.05.0 \
+  4.06.1 \
   4.07.1 \
   4.08.1 \
   4.09.1 \
   4.10.0 \
   4.11.1 \
+  4.12.0 \
 
 # Disable this switch for now, as core_bench does not seem to work under it.
 # 4.09.0+bytecode-only \
@@ -72,7 +75,7 @@ versions:
 handiwork:
 	@ for v in $(VERSIONS) ; do \
 	    echo "Dealing with switch $$v..." ; \
-	    opam install --switch $$v --yes hashcons core_bench ; \
+	    opam install --switch $$v --yes ppxlib.0.22.0 ; \
 	  done
 
 .PHONY: pin

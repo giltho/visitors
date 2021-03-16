@@ -6,6 +6,8 @@
   syntax tree of OCaml 4.12.
   (Contributed by Sonja Heinze.)
 
+* Relax our requirement from OCaml 4.07 to OCaml 4.05.
+
 ## 2021/01/27
 
 * Switch to version 5.0 of `ppx_deriving`.
