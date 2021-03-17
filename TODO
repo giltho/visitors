@@ -12,6 +12,10 @@ Better clean up & share code at the three call sites of [bulk].
 
 TODO (PERHAPS)
 
+* It might make sense to offer a third mode in addition to `monomorphic`
+  and `polymorphic`, where the methods are polymorphic in their main
+  argument but monomorphic in `'env`. (Suggestion by Devon Loehr.)
+
 Philip's question: when you compose two transformations formulated as map
 visitors, can you deforest? (eliminate the allocation of the intermediate
 tree)
