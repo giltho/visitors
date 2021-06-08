@@ -234,7 +234,7 @@ export:
 REPO     := https://gitlab.inria.fr/fpottier/$(THIS)
 
 # The archive URL (https).
-ARCHIVE  := $(REPO)/repository/$(DATE)/archive.tar.gz
+ARCHIVE  := $(REPO)/-/archive/$(DATE)/archive.tar.gz
 
 .PHONY: opam
 opam:
