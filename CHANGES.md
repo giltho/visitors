@@ -1,5 +1,12 @@
 # Changes
 
+## 2021/06/08
+
+* Replace a reference to the `Parser` module in `ppxlib` with a reference to
+  the `Parser` module in `compiler-libs`, so as to remain compatible with the
+  next version of `ppxlib` (> 0.22.0), where the type `token` is abstract.
+  (Contributed by Sonja Heinze.)
+
 ## 2021/01/27
 
 * Switch to version 0.22.0 of `ppxlib`, which internally uses the abstract
