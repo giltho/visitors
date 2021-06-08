@@ -27,6 +27,11 @@ type tyvars = tyvar list
 
 (* Note: [Location.formatter_for_warnings] appeared in OCaml 4.02.2. *)
 
+(* 2021/06/08 By default, [Parser] would be [Ppxlib.Parser], which exposes the
+   type [token] as an abstract type. Because we need the type [token] to be
+   concrete, we use [Ocaml_common.Parser] instead. [Ocaml_common] is part of
+   compiler-libs. *)
+
 type classification =
   | LIDENT
   | UIDENT
@@ -40,6 +45,7 @@ let classify (s : string) : classification =
   let result = try
       let token1 = Lexer.token lexbuf in
       let token2 = Lexer.token lexbuf in
+      let module Parser = Ocaml_common.Parser in
       match token1, token2 with
       | Parser.LIDENT _, Parser.EOF ->
          LIDENT
