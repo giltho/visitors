@@ -12,7 +12,7 @@
     :standard
     -safe-string
     -g
-    -w @A-4-44
+    -w @A-4-44-70
   ))
   (release (flags
     :standard
