@@ -57,6 +57,8 @@ VERSIONS := \
   4.10.0 \
   4.11.1 \
   4.12.0 \
+  4.13.1 \
+  4.14.0 \
 
 # Disable this switch for now, as core_bench does not seem to work under it.
 # 4.09.0+bytecode-only \
