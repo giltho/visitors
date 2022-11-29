@@ -1,5 +1,5 @@
 module Bench = Core_bench.Bench
-module Command = Core.Command
+module Command = Command_unix (* this relies on library core.command_unix >= 0.15 *)
 
 let run tests =
   let tests =

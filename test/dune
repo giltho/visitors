@@ -20,7 +20,7 @@
   (name bench)
   (modules bench)
   (preprocess (pps visitors.ppx))
-  (libraries core_bench)
+  (libraries core_bench core_unix.command_unix)
 )
 
 (library
