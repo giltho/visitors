@@ -37,7 +37,7 @@ let visibility m =
 
 (* The following brings [generate] and [dump] into scope. *)
 
-include ClassFieldStore(struct end)
+include ClassFieldStore()
 
 let annotation (ty : core_type) : core_type option =
   (* A type annotation is generated only in [polymorphic] mode. *)
@@ -53,7 +53,7 @@ let generate_virtual_method m ty =
 
 (* The following brings [warning] and [warnings] into scope. *)
 
-include WarningStore(struct end)
+include WarningStore()
 
 (* [datacon_opacity_warning cd] emits a warning (if necessary) about the
    following issue. One should not write "A of int[@opaque]". Instead, one
