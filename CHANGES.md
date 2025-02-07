@@ -1,5 +1,12 @@
 # Changes
 
+## 2025/02/07
+
+* `visitors` would sometimes produce an empty universal quantification.
+  Beginning with OCaml 5.3, this causes an error: `Error: broken invariant in
+  parsetree: Explicit universal type quantification cannot be empty.`
+  Reported and fixed by Opale Sjöstedt.
+
 ## 2021/06/08
 
 * Replace a reference to the `Parser` module in `ppxlib` with a reference to
