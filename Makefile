@@ -58,7 +58,11 @@ VERSIONS := \
   4.11.1 \
   4.12.0 \
   4.13.1 \
-  4.14.0 \
+  4.14.1 \
+  5.0.0 \
+  5.1.0 \
+  5.2.0 \
+  5.3.0 \
 
 # Disable this switch for now, as core_bench does not seem to work under it.
 # 4.09.0+bytecode-only \
@@ -77,7 +81,7 @@ versions:
 handiwork:
 	@ for v in $(VERSIONS) ; do \
 	    echo "Dealing with switch $$v..." ; \
-	    opam install --switch $$v --yes ppxlib.0.22.0 ; \
+	    opam install --switch $$v --yes ppxlib ppx_deriving result ppx_import core_unix ; \
 	  done
 
 .PHONY: pin
