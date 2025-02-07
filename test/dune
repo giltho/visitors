@@ -26,7 +26,7 @@
 (library
   (name snippets_basic)
   (preprocess (pps visitors.ppx))
-  (flags -w A-4-34-44)
+  (flags -w A-4-34-44-70)
   (modules
     point build
     cloud
@@ -93,7 +93,7 @@
 (library
   (name snippets_that_need_hashcons)
   (preprocess (pps visitors.ppx))
-  (flags -w A-4-34-44)
+  (flags -w A-4-34-44-70)
   (libraries hashcons)
   (modules
     expr08
