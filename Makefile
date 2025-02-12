@@ -26,10 +26,6 @@ install: all
 uninstall:
 	@ dune uninstall
 
-.PHONY: clean
-clean::
-	@ dune clean
-
 .PHONY: test
 test:
 	@ dune build --display short @all
@@ -96,12 +92,8 @@ unpin:
 
 # Cleaning up.
 
-clean::
-	@ find . -name "*~" -exec rm '{}' \;
-	@ find . -name "*.processed.ml" -exec rm '{}' \;
-	@ for i in doc ; do \
-	  $(MAKE) -C $$i $@ ; \
-	done
+clean:
+	git clean -fdX
 
 # -------------------------------------------------------------------------
 
