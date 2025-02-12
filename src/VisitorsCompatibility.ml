@@ -58,10 +58,11 @@ let str2string (s : str) : string =
 let typ_poly (tyvars : string list) (cty : core_type) : core_type =
   (* OCaml 5.3 does not allow [Typ.poly] to be applied to an empty
      list of universal quantifiers. *)
-  if List.is_empty tyvars then
-    cty
-  else
-    Typ.poly (List.map string2str tyvars) cty
+  match tyvars with
+  | [] ->
+      cty
+  | _ :: _ ->
+      Typ.poly (List.map string2str tyvars) cty
 
 let exp_send (e : expression) (m : string) : expression =
   Exp.send e (string2str m)
