@@ -1,6 +1,6 @@
 # Changes
 
-## 2025/02/07
+## 2025/02/12
 
 * `visitors` would sometimes produce an empty universal quantification.
   Beginning with OCaml 5.3, this causes an error: `Error: broken invariant in
