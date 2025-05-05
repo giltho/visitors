@@ -64,6 +64,7 @@
     expr
     expr_redef
     fold
+    identical_field_name
     map_from_fold
     mapReduce
     monomorphic

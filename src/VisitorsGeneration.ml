@@ -393,28 +393,24 @@ let inherit_ (c : Longident.t) (tys : core_types) : class_field =
    it is inferred by OCaml. If present, it can be a polymorphic type. *)
 
 type meth =
-  Meth of private_flag * methode * expression option * core_type option
+  Meth of private_flag * methode * expression option * core_type
 
-let concrete_method p m e oty =
-  Meth (p, m, Some e, oty)
+let concrete_method p m e ty =
+  Meth (p, m, Some e, ty)
 
-let virtual_method p m oty =
-  Meth (p, m, None, oty)
+let virtual_method p m ty =
+  Meth (p, m, None, ty)
 
 (* -------------------------------------------------------------------------- *)
 
 (* Converting a method description to OCaml abstract syntax. *)
 
-let oe2cfk (oe : expression option) (oty : core_type option) : class_field_kind =
-  match oe, oty with
-  | Some e, Some _ ->
-      Cf.concrete Fresh (Exp.poly e oty)
-  | Some e, None ->
-      Cf.concrete Fresh e
-  | None, Some ty ->
+let oe2cfk (oe : expression option) (ty : core_type) : class_field_kind =
+  match oe with
+  | Some e ->
+      Cf.concrete Fresh (Exp.poly e (Some ty))
+  | None ->
       Cf.virtual_ ty
-  | None, None ->
-      Cf.virtual_ ty_any
 
 let meth2cf (Meth (p, m, oe, oty)) : class_field =
   Cf.method_ (mknoloc m) p (oe2cfk oe oty)

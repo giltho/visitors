@@ -85,7 +85,7 @@ let uniq cmp xs =
 (* [weed cmp xs] returns the list [xs] deprived of any duplicate elements. *)
 
 let weed cmp xs =
-  uniq cmp (List.sort cmp xs)
+  List.sort_uniq cmp xs
 
 (* [fold_right1] is like [fold_right], but uses the last element of the list
    (if the list is nonempty) as the initial accumulator, saving one call to

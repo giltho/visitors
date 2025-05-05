@@ -4,3 +4,4 @@ _build
 *.processed.ml
 doc/manual.pdf
 dune-workspace.versions
+_opam

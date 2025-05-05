@@ -39,15 +39,12 @@ let visibility m =
 
 include ClassFieldStore()
 
-let annotation (ty : core_type) : core_type option =
-  (* A type annotation is generated only in [polymorphic] mode. *)
-  if X.polymorphic then Some ty else None
 
 let generate_concrete_method m e ty =
-  generate (concrete_method (visibility m) m e (annotation ty))
+  generate (concrete_method (visibility m) m e ty)
 
 let generate_virtual_method m ty =
-  generate (virtual_method (visibility m) m (annotation ty))
+  generate (virtual_method (visibility m) m ty)
 
 (* -------------------------------------------------------------------------- *)
 
